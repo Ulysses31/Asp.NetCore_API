@@ -84,15 +84,15 @@ namespace Asp.NetCore_API.Controllers.V1
 		/// <param name="authorForUpdate">The author for update.</param>
 		/// <returns>Task ActionResult Author></returns>
 		/// <remarks>
-		/// Sample request (this request updates the author's first name)
-		/// PATCH /authors/id
-		/// [
-		///		{
-		///			"op": "replace",
-		///			"path": "/firstname",
-		///			"value": "new first name"
-		///		}
-		/// ]
+		/// Sample request (this request updates the author's **first name**) \
+		///			PATCH /authors/id
+		///			[
+		///				{
+		///					"op": "replace",
+		///					"path": "/firstname",
+		///					"value": "new first name"
+		///				}
+		///			]
 		/// </remarks>
 		/// <example>
 		/// <code>
@@ -101,7 +101,6 @@ namespace Asp.NetCore_API.Controllers.V1
 		/// </code>
 		/// </example>
 		/// <response code="200">Returns the updated author</response>
-
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[MapToApiVersion("1.0")]

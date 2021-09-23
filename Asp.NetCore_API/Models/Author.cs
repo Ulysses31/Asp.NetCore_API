@@ -8,7 +8,7 @@ namespace Asp.NetCore_API.Models
 	public class Author
 	{
 		/// <summary>
-		/// Gets or sets the identifier.
+		/// Gets or sets the **identifier**.
 		/// </summary>
 		/// <value>
 		/// The identifier.
@@ -16,7 +16,7 @@ namespace Asp.NetCore_API.Models
 		public Guid Id { get; set; }
 
 		/// <summary>
-		/// Gets or sets the first name.
+		/// Gets or sets the **first name**.
 		/// </summary>
 		/// <value>
 		/// The first name.
@@ -24,7 +24,7 @@ namespace Asp.NetCore_API.Models
 		public string FirstName { get; set; }
 
 		/// <summary>
-		/// Gets or sets the last name.
+		/// Gets or sets the **last name**.
 		/// </summary>
 		/// <value>
 		/// The last name.

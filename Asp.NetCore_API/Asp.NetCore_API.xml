@@ -119,15 +119,15 @@
             <param name="authorForUpdate">The author for update.</param>
             <returns>Task ActionResult Author></returns>
             <remarks>
-            Sample request (this request updates the author's first name)
-            PATCH /authors/id
-            [
-            	{
-            		"op": "replace",
-            		"path": "/firstname",
-            		"value": "new first name"
-            	}
-            ]
+            Sample request (this request updates the author's **first name**) \
+            		PATCH /authors/id
+            		[
+            			{
+            				"op": "replace",
+            				"path": "/firstname",
+            				"value": "new first name"
+            			}
+            		]
             </remarks>
             <example>
             <code>
@@ -215,7 +215,7 @@
         </member>
         <member name="P:Asp.NetCore_API.Entities.Author.Id">
             <summary>
-            Gets or sets the identifier.
+            Gets or sets the **identifier**.
             </summary>
             <value>
             The identifier.
@@ -223,7 +223,7 @@
         </member>
         <member name="P:Asp.NetCore_API.Entities.Author.FirstName">
             <summary>
-            Gets or sets the first name.
+            Gets or sets the **first name**.
             </summary>
             <value>
             The first name.
@@ -231,7 +231,7 @@
         </member>
         <member name="P:Asp.NetCore_API.Entities.Author.LastName">
             <summary>
-            Gets or sets the last name.
+            Gets or sets the **last name**.
             </summary>
             <value>
             The last name.
@@ -239,7 +239,7 @@
         </member>
         <member name="P:Asp.NetCore_API.Entities.Author.Books">
             <summary>
-            Gets or sets the books.
+            Gets or sets the **books**.
             </summary>
             <value>
             The books.
@@ -305,7 +305,7 @@
         </member>
         <member name="P:Asp.NetCore_API.Models.Author.Id">
             <summary>
-            Gets or sets the identifier.
+            Gets or sets the **identifier**.
             </summary>
             <value>
             The identifier.
@@ -313,7 +313,7 @@
         </member>
         <member name="P:Asp.NetCore_API.Models.Author.FirstName">
             <summary>
-            Gets or sets the first name.
+            Gets or sets the **first name**.
             </summary>
             <value>
             The first name.
@@ -321,7 +321,7 @@
         </member>
         <member name="P:Asp.NetCore_API.Models.Author.LastName">
             <summary>
-            Gets or sets the last name.
+            Gets or sets the **last name**.
             </summary>
             <value>
             The last name.

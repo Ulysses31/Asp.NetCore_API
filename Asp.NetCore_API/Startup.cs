@@ -177,13 +177,20 @@ namespace Asp.NetCore_API
 
 			app.UseHttpsRedirection();
 
+			app.UseStaticFiles();
+
 			app.UseSwagger();
 			app.UseSwaggerUI(options => {
+				
+				options.InjectStylesheet("/Assets/custom-ui.css");
+
 				foreach (var description in provider.ApiVersionDescriptions) {
 					options.SwaggerEndpoint(
 							$"/swagger/openapi{description.GroupName}/swagger.json",
 							description.GroupName.ToUpperInvariant());
 					options.RoutePrefix = "";
+					//options.EnableDeepLinking();
+					options.DisplayOperationId();
 				}
 			});
 
