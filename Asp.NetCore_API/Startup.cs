@@ -181,9 +181,7 @@ namespace Asp.NetCore_API
 
 			app.UseSwagger();
 			app.UseSwaggerUI(options => {
-				
 				options.InjectStylesheet("/Assets/custom-ui.css");
-
 				foreach (var description in provider.ApiVersionDescriptions) {
 					options.SwaggerEndpoint(
 							$"/swagger/openapi{description.GroupName}/swagger.json",
