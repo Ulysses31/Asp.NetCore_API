@@ -1,0 +1,708 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Asp.NetCore_API</name>
+    </assembly>
+    <members>
+        <member name="T:Asp.NetCore_API.ConfigureSwaggerOptions">
+            <summary>
+            ConfigureSwaggerOptions class
+            </summary>
+        </member>
+        <member name="M:Asp.NetCore_API.ConfigureSwaggerOptions.#ctor(Microsoft.AspNetCore.Mvc.ApiExplorer.IApiVersionDescriptionProvider)">
+            <summary>
+            ConfigureSwaggerOptions class
+            </summary>
+            <param name="provider"></param>
+        </member>
+        <member name="M:Asp.NetCore_API.ConfigureSwaggerOptions.Configure(Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions)">
+            <summary>
+            Configure class
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:Asp.NetCore_API.ConfigureSwaggerOptions.CreateInfoForApiVersion(Microsoft.AspNetCore.Mvc.ApiExplorer.ApiVersionDescription)">
+            <summary>
+            OpenApiInfo class
+            </summary>
+            <param name="description"></param>
+            <returns>OpenApiInfo</returns>
+        </member>
+        <member name="T:Asp.NetCore_API.Contexts.LibraryContext">
+            <summary>
+            LibraryContext : DbContext class
+            </summary>
+            <seealso cref="T:Microsoft.EntityFrameworkCore.DbContext" />
+        </member>
+        <member name="P:Asp.NetCore_API.Contexts.LibraryContext.Books">
+            <summary>
+            Gets or sets the books.
+            </summary>
+            <value>
+            The books.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Contexts.LibraryContext.Authors">
+            <summary>
+            Gets or sets the authors.
+            </summary>
+            <value>
+            The authors.
+            </value>
+        </member>
+        <member name="M:Asp.NetCore_API.Contexts.LibraryContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Asp.NetCore_API.Contexts.LibraryContext})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Asp.NetCore_API.Contexts.LibraryContext"/> class.
+            </summary>
+            <param name="options">The options.</param>
+        </member>
+        <member name="M:Asp.NetCore_API.Contexts.LibraryContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Override this method to further configure the model that was discovered by convention from the entity types
+            exposed in <see cref="T:Microsoft.EntityFrameworkCore.DbSet`1" /> properties on your derived context. The resulting model may be cached
+            and re-used for subsequent instances of your derived context.
+            </summary>
+            <param name="modelBuilder">The builder being used to construct the model for this context. Databases (and other extensions) typically
+            define extension methods on this object that allow you to configure aspects of the model that are specific
+            to a given database.</param>
+            <remarks>
+            If a model is explicitly set on the options for this context (via <see cref="M:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.UseModel(Microsoft.EntityFrameworkCore.Metadata.IModel)" />)
+            then this method will not be run.
+            </remarks>
+        </member>
+        <member name="T:Asp.NetCore_API.Controllers.V1.AuthorsController">
+            <summary>
+            AuthorsController class
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
+        <member name="M:Asp.NetCore_API.Controllers.V1.AuthorsController.#ctor(Asp.NetCore_API.Services.IAuthorRepository,AutoMapper.IMapper)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Asp.NetCore_API.Controllers.V1.AuthorsController"/> class.
+            </summary>
+            <param name="authorsRepository">The authors repository.</param>
+            <param name="mapper">The mapper.</param>
+        </member>
+        <member name="M:Asp.NetCore_API.Controllers.V1.AuthorsController.GetAuthors">
+            <summary>
+            Gets the authors.
+            </summary>
+            <returns>Task ActionResult IEnumerable Author</returns>
+            <response code="200">Returns list of authors</response>
+        </member>
+        <member name="M:Asp.NetCore_API.Controllers.V1.AuthorsController.GetAuthor(System.Guid)">
+            <summary>
+            Gets the author.
+            </summary>
+            <param name="authorId">The author identifier.</param>
+            <returns>Task ActionResult Author</returns>
+            <response code="200">Return the author</response>
+        </member>
+        <member name="M:Asp.NetCore_API.Controllers.V1.AuthorsController.UpdateAuthor(System.Guid,Asp.NetCore_API.Models.AuthorForUpdate)">
+            <summary>
+            Updates the author.
+            </summary>
+            <param name="authorId">The author identifier.</param>
+            <param name="authorForUpdate">The author for update.</param>
+            <returns>Task ActionResult Author></returns>
+            <remarks>
+            Sample request (this request updates the author's first name)
+            PATCH /authors/id
+            [
+            	{
+            		"op": "replace",
+            		"path": "/firstname",
+            		"value": "new first name"
+            	}
+            ]
+            </remarks>
+            <example>
+            <code>
+            	 var index = 5;
+            	 index++;
+            </code>
+            </example>
+            <response code="200">Returns the updated author</response>
+        </member>
+        <member name="M:Asp.NetCore_API.Controllers.V1.AuthorsController.UpdateAuthor(System.Guid,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{Asp.NetCore_API.Models.AuthorForUpdate})">
+            <summary>
+            Updates the author.
+            </summary>
+            <param name="authorId">The author identifier.</param>
+            <param name="patchDocument">The patch document.</param>
+            <returns>Task ActionResult Author</returns>
+            <response code="200">Returns the new author</response>
+        </member>
+        <member name="T:Asp.NetCore_API.Controllers.V1.BooksController">
+            <summary>
+            BooksController : ControllerBase class
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="M:Asp.NetCore_API.Controllers.V1.BooksController.#ctor(Asp.NetCore_API.Services.IBookRepository,Asp.NetCore_API.Services.IAuthorRepository,AutoMapper.IMapper)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Asp.NetCore_API.Controllers.V1.BooksController"/> class.
+            </summary>
+            <param name="bookRepository">The book repository.</param>
+            <param name="authorRepository">The author repository.</param>
+            <param name="mapper">The mapper.</param>
+        </member>
+        <member name="M:Asp.NetCore_API.Controllers.V1.BooksController.GetBooks(System.Guid)">
+            <summary>
+            Gets the books.
+            </summary>
+            <param name="authorId">The author identifier.</param>
+            <returns>Task ActionResult IEnumerable Book</returns>
+            <response code="200">Returns list of books</response>
+        </member>
+        <member name="M:Asp.NetCore_API.Controllers.V1.BooksController.GetBook(System.Guid,System.Guid)">
+            <summary>
+            Gets the book.
+            </summary>
+            <param name="authorId">The author identifier.</param>
+            <param name="bookId">The book identifier.</param>
+            <returns>Task ActionResult Book</returns>
+            <response code="200">Returns the requested book</response>
+        </member>
+        <member name="M:Asp.NetCore_API.Controllers.V1.BooksController.CreateBook(System.Guid,Asp.NetCore_API.Models.BookForCreation)">
+            <summary>
+            Creates the book.
+            </summary>
+            <param name="authorId">The author identifier.</param>
+            <param name="bookForCreation">The book for creation.</param>
+            <returns>
+            Task ActionResult Book
+            </returns>
+            <response code="200">Returns the new created book</response>
+        </member>
+        <member name="T:Asp.NetCore_API.Controllers.V1_1.AuthorsController">
+            <summary>
+            AuthorsController class
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
+        <member name="M:Asp.NetCore_API.Controllers.V1_1.AuthorsController.#ctor(Asp.NetCore_API.Services.IAuthorRepository,AutoMapper.IMapper)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Asp.NetCore_API.Controllers.V1_1.AuthorsController"/> class.
+            </summary>
+            <param name="authorsRepository">The authors repository.</param>
+            <param name="mapper">The mapper.</param>
+        </member>
+        <member name="M:Asp.NetCore_API.Controllers.V1_1.AuthorsController.GetAuthors">
+            <summary>
+            Gets the authors V1.1
+            </summary>
+            <returns>Task ActionResult IEnumerable Author</returns>
+            <response code="200">Returns list of authors</response>
+        </member>
+        <member name="T:Asp.NetCore_API.Entities.Author">
+            <summary>
+            Author class
+            </summary>
+        </member>
+        <member name="P:Asp.NetCore_API.Entities.Author.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Entities.Author.FirstName">
+            <summary>
+            Gets or sets the first name.
+            </summary>
+            <value>
+            The first name.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Entities.Author.LastName">
+            <summary>
+            Gets or sets the last name.
+            </summary>
+            <value>
+            The last name.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Entities.Author.Books">
+            <summary>
+            Gets or sets the books.
+            </summary>
+            <value>
+            The books.
+            </value>
+        </member>
+        <member name="T:Asp.NetCore_API.Entities.Book">
+            <summary>
+            Book class
+            </summary>
+        </member>
+        <member name="P:Asp.NetCore_API.Entities.Book.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Entities.Book.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+            <value>
+            The title.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Entities.Book.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>
+            The description.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Entities.Book.AmountOfPages">
+            <summary>
+            Gets or sets the amount of pages.
+            </summary>
+            <value>
+            The amount of pages.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Entities.Book.AuthorId">
+            <summary>
+            Gets or sets the author identifier.
+            </summary>
+            <value>
+            The author identifier.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Entities.Book.Author">
+            <summary>
+            Gets or sets the author.
+            </summary>
+            <value>
+            The author.
+            </value>
+        </member>
+        <member name="T:Asp.NetCore_API.Models.Author">
+            <summary>
+            Author class
+            </summary>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.Author.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.Author.FirstName">
+            <summary>
+            Gets or sets the first name.
+            </summary>
+            <value>
+            The first name.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.Author.LastName">
+            <summary>
+            Gets or sets the last name.
+            </summary>
+            <value>
+            The last name.
+            </value>
+        </member>
+        <member name="T:Asp.NetCore_API.Models.AuthorForUpdate">
+            <summary>
+            AuthorForUpdate class
+            </summary>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.AuthorForUpdate.FirstName">
+            <summary>
+            Gets or sets the first name.
+            </summary>
+            <value>
+            The first name.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.AuthorForUpdate.LastName">
+            <summary>
+            Gets or sets the last name.
+            </summary>
+            <value>
+            The last name.
+            </value>
+        </member>
+        <member name="T:Asp.NetCore_API.Models.Book">
+            <summary>
+            Book class
+            </summary>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.Book.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.Book.AuthorFirstName">
+            <summary>
+            Gets or sets the first name of the author.
+            </summary>
+            <value>
+            The first name of the author.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.Book.AuthorLastName">
+            <summary>
+            Gets or sets the last name of the author.
+            </summary>
+            <value>
+            The last name of the author.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.Book.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+            <value>
+            The title.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.Book.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>
+            The description.
+            </value>
+        </member>
+        <member name="T:Asp.NetCore_API.Models.BookForCreation">
+            <summary>
+            BookForCreation class
+            </summary>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.BookForCreation.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+            <value>
+            The title.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.BookForCreation.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>
+            The description.
+            </value>
+        </member>
+        <member name="T:Asp.NetCore_API.Models.BookForCreationWithAmountOfPages">
+            <summary>
+            BookForCreationWithAmountOfPages class
+            </summary>
+            <seealso cref="T:Asp.NetCore_API.Models.BookForCreation" />
+        </member>
+        <member name="P:Asp.NetCore_API.Models.BookForCreationWithAmountOfPages.AmountOfPages">
+            <summary>
+            Gets or sets the amount of pages.
+            </summary>
+            <value>
+            The amount of pages.
+            </value>
+        </member>
+        <member name="T:Asp.NetCore_API.Models.BookWithConcatenatedAuthorName">
+            <summary>
+            BookWithConcatenatedAuthorName class
+            </summary>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.BookWithConcatenatedAuthorName.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.BookWithConcatenatedAuthorName.Author">
+            <summary>
+            Gets or sets the author.
+            </summary>
+            <value>
+            The author.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.BookWithConcatenatedAuthorName.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+            <value>
+            The title.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.BookWithConcatenatedAuthorName.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>
+            The description.
+            </value>
+        </member>
+        <member name="T:Asp.NetCore_API.Profiles.AuthorProfile">
+            <summary>
+            AuthorProfile : Profile class
+            </summary>
+            <seealso cref="T:AutoMapper.Profile" />
+        </member>
+        <member name="M:Asp.NetCore_API.Profiles.AuthorProfile.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Asp.NetCore_API.Profiles.AuthorProfile"/> class.
+            </summary>
+        </member>
+        <member name="T:Asp.NetCore_API.Profiles.BookProfile">
+            <summary>
+            BookProfile : Profile class
+            </summary>
+            <seealso cref="T:AutoMapper.Profile" />
+        </member>
+        <member name="M:Asp.NetCore_API.Profiles.BookProfile.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Asp.NetCore_API.Profiles.BookProfile"/> class.
+            </summary>
+        </member>
+        <member name="T:Asp.NetCore_API.Program">
+            <summary>
+            Program class
+            </summary>
+        </member>
+        <member name="M:Asp.NetCore_API.Program.Main(System.String[])">
+            <summary>
+            Defines the entry point of the application.
+            </summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="M:Asp.NetCore_API.Program.CreateWebHostBuilder(System.String[])">
+            <summary>
+            Creates the web host builder.
+            </summary>
+            <param name="args">The arguments.</param>
+            <returns>IWebHostBuilder</returns>
+        </member>
+        <member name="T:Asp.NetCore_API.Services.AuthorRepository">
+            <summary>
+            AuthorRepository class
+            </summary>
+            <seealso cref="T:Asp.NetCore_API.Services.IAuthorRepository" />
+            <seealso cref="T:System.IDisposable" />
+        </member>
+        <member name="M:Asp.NetCore_API.Services.AuthorRepository.#ctor(Asp.NetCore_API.Contexts.LibraryContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Asp.NetCore_API.Services.AuthorRepository"/> class.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="M:Asp.NetCore_API.Services.AuthorRepository.AuthorExistsAsync(System.Guid)">
+            <summary>
+            Authors the exists asynchronous.
+            </summary>
+            <param name="authorId">The author identifier.</param>
+            <returns>Task bool</returns>
+        </member>
+        <member name="M:Asp.NetCore_API.Services.AuthorRepository.GetAuthorsAsync">
+            <summary>
+            Gets the authors asynchronous.
+            </summary>
+            <returns>Task IEnumerable Author</returns>
+        </member>
+        <member name="M:Asp.NetCore_API.Services.AuthorRepository.GetAuthorAsync(System.Guid)">
+            <summary>
+            Gets the author asynchronous.
+            </summary>
+            <param name="authorId">The author identifier.</param>
+            <returns>Task Author</returns>
+            <exception cref="T:System.ArgumentException">authorId</exception>
+        </member>
+        <member name="M:Asp.NetCore_API.Services.AuthorRepository.UpdateAuthor(Asp.NetCore_API.Entities.Author)">
+            <summary>
+            Updates the author.
+            </summary>
+            <param name="author">The author.</param>
+        </member>
+        <member name="M:Asp.NetCore_API.Services.AuthorRepository.SaveChangesAsync">
+            <summary>
+            Saves the changes asynchronous.
+            </summary>
+            <returns>Task bool</returns>
+        </member>
+        <member name="M:Asp.NetCore_API.Services.AuthorRepository.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Asp.NetCore_API.Services.AuthorRepository.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="T:Asp.NetCore_API.Services.BookRepository">
+            <summary>
+            BookRepository class
+            </summary>
+            <seealso cref="T:Asp.NetCore_API.Services.IBookRepository" />
+            <seealso cref="T:System.IDisposable" />
+        </member>
+        <member name="M:Asp.NetCore_API.Services.BookRepository.#ctor(Asp.NetCore_API.Contexts.LibraryContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Asp.NetCore_API.Services.BookRepository"/> class.
+            </summary>
+            <param name="context">The context.</param>
+            <exception cref="T:System.ArgumentNullException">context</exception>
+        </member>
+        <member name="M:Asp.NetCore_API.Services.BookRepository.GetBooksAsync(System.Guid)">
+            <summary>
+            Gets the books asynchronous.
+            </summary>
+            <param name="authorId">The author identifier.</param>
+            <returns>Task IEnumerable Book</returns>
+            <exception cref="T:System.ArgumentException">authorId</exception>
+        </member>
+        <member name="M:Asp.NetCore_API.Services.BookRepository.GetBookAsync(System.Guid,System.Guid)">
+            <summary>
+            Gets the book asynchronous.
+            </summary>
+            <param name="authorId">The author identifier.</param>
+            <param name="bookId">The book identifier.</param>
+            <returns>Task Book</returns>
+            <exception cref="T:System.ArgumentException">
+            authorId
+            or
+            bookId
+            </exception>
+        </member>
+        <member name="M:Asp.NetCore_API.Services.BookRepository.AddBook(Asp.NetCore_API.Entities.Book)">
+            <summary>
+            Adds the book.
+            </summary>
+            <param name="bookToAdd">The book to add.</param>
+            <exception cref="T:System.ArgumentNullException">bookToAdd</exception>
+        </member>
+        <member name="M:Asp.NetCore_API.Services.BookRepository.SaveChangesAsync">
+            <summary>
+            Saves the changes asynchronous.
+            </summary>
+            <returns>async Task bool</returns>
+        </member>
+        <member name="M:Asp.NetCore_API.Services.BookRepository.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Asp.NetCore_API.Services.BookRepository.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="T:Asp.NetCore_API.Services.IAuthorRepository">
+            <summary>
+            IAuthorRepository : IDisposable class
+            </summary>
+            <seealso cref="T:System.IDisposable" />
+        </member>
+        <member name="M:Asp.NetCore_API.Services.IAuthorRepository.AuthorExistsAsync(System.Guid)">
+            <summary>
+            Authors the exists asynchronous.
+            </summary>
+            <param name="authorId">The author identifier.</param>
+            <returns>Task bool</returns>
+        </member>
+        <member name="M:Asp.NetCore_API.Services.IAuthorRepository.GetAuthorsAsync">
+            <summary>
+            Gets the authors asynchronous.
+            </summary>
+            <returns>Task IEnumerable Author</returns>
+        </member>
+        <member name="M:Asp.NetCore_API.Services.IAuthorRepository.GetAuthorAsync(System.Guid)">
+            <summary>
+            Gets the author asynchronous.
+            </summary>
+            <param name="authorId">The author identifier.</param>
+            <returns>Task Author</returns>
+        </member>
+        <member name="M:Asp.NetCore_API.Services.IAuthorRepository.UpdateAuthor(Asp.NetCore_API.Entities.Author)">
+            <summary>
+            Updates the author.
+            </summary>
+            <param name="author">The author.</param>
+        </member>
+        <member name="M:Asp.NetCore_API.Services.IAuthorRepository.SaveChangesAsync">
+            <summary>
+            Saves the changes asynchronous.
+            </summary>
+            <returns>bool</returns>
+        </member>
+        <member name="T:Asp.NetCore_API.Services.IBookRepository">
+            <summary>
+            IBookRepository : IDisposable class
+            </summary>
+            <seealso cref="T:System.IDisposable" />
+        </member>
+        <member name="M:Asp.NetCore_API.Services.IBookRepository.GetBooksAsync(System.Guid)">
+            <summary>
+            Gets the books asynchronous.
+            </summary>
+            <param name="authorId">The author identifier.</param>
+            <returns>Task IEnumerable Book</returns>
+        </member>
+        <member name="M:Asp.NetCore_API.Services.IBookRepository.GetBookAsync(System.Guid,System.Guid)">
+            <summary>
+            Gets the book asynchronous.
+            </summary>
+            <param name="authorId">The author identifier.</param>
+            <param name="bookId">The book identifier.</param>
+            <returns>Task Book</returns>
+        </member>
+        <member name="M:Asp.NetCore_API.Services.IBookRepository.AddBook(Asp.NetCore_API.Entities.Book)">
+            <summary>
+            Adds the book.
+            </summary>
+            <param name="bookToAdd">The book to add.</param>
+        </member>
+        <member name="M:Asp.NetCore_API.Services.IBookRepository.SaveChangesAsync">
+            <summary>
+            Saves the changes asynchronous.
+            </summary>
+            <returns>Task bool</returns>
+        </member>
+        <member name="T:Asp.NetCore_API.Startup">
+            <summary>
+            Startup class
+            </summary>
+        </member>
+        <member name="M:Asp.NetCore_API.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Startup class
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:Asp.NetCore_API.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            ConfigureServices class
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:Asp.NetCore_API.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.AspNetCore.Mvc.ApiExplorer.IApiVersionDescriptionProvider)">
+            <summary>
+            Configure class
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+            <param name="provider"></param>
+        </member>
+    </members>
+</doc>
