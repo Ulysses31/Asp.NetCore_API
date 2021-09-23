@@ -4,6 +4,19 @@
         <name>Asp.NetCore_API</name>
     </assembly>
     <members>
+        <member name="T:Library.API.Authentication.BasicAuthenticationHandler">
+            <summary>
+            BasicAuthenticationHandler class
+            </summary>
+        </member>
+        <member name="M:Library.API.Authentication.BasicAuthenticationHandler.HandleAuthenticateAsync">
+            <summary>
+            Allows derived types to handle authentication.
+            </summary>
+            <returns>
+            The <see cref="T:Microsoft.AspNetCore.Authentication.AuthenticateResult" />.
+            </returns>
+        </member>
         <member name="T:Asp.NetCore_API.ConfigureSwaggerOptions">
             <summary>
             ConfigureSwaggerOptions class

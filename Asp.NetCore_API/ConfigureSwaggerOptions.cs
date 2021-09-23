@@ -51,7 +51,8 @@ namespace Asp.NetCore_API
 			{
 				Title = "Sample API",
 				Version = description.ApiVersion.ToString(),
-				Description = "A sample application with Swagger, Swashbuckle, and API versioning.",
+				Description = $"A sample application with Swagger, " +
+				$" Swashbuckle, and API versioning, using Basic Authentication.",
 				Contact = new Microsoft.OpenApi.Models.OpenApiContact()
 				{
 					Email = "info@datacenter.com",

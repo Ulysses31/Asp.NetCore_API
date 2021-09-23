@@ -1,11 +1,14 @@
 using Asp.NetCore_API.Contexts;
 using Asp.NetCore_API.Services;
+using Library.API.Authentication;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
@@ -13,8 +16,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -44,42 +49,52 @@ namespace Asp.NetCore_API
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddDbContext<LibraryContext>(options =>
-			{
+			services.AddDbContext<LibraryContext>(options => {
 				options.UseSqlServer(Configuration.GetConnectionString("DBConnection"));
 			});
 
 			services.AddControllers();
 
-			services.AddApiVersioning(setup =>
-			{
+			services.AddApiVersioning(setup => {
 				setup.DefaultApiVersion = new ApiVersion(1, 0);
 				setup.AssumeDefaultVersionWhenUnspecified = true;
 				setup.ReportApiVersions = true;
 			});
 
-			services.AddVersionedApiExplorer(setup =>
-			{
+			services.AddVersionedApiExplorer(setup => {
 				setup.GroupNameFormat = "'v'VV";
 				setup.SubstituteApiVersionInUrl = true;
 			});
 
 			services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 
-			services.AddSwaggerGen(setupAction =>
-			{
-				setupAction.DocInclusionPredicate((documentName, apiDescription) =>
-				{
+			services.AddSwaggerGen(setupAction => {
+				setupAction.AddSecurityDefinition("basicAuth", new Microsoft.OpenApi.Models.OpenApiSecurityScheme() {
+					Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+					Scheme = "basic",
+					Description = "Input your username and password to access this API."
+				});
+
+				setupAction.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement() {
+					{
+						new OpenApiSecurityScheme() {
+							Reference = new OpenApiReference() {
+								Type = ReferenceType.SecurityScheme,
+								Id = "basicAuth"
+							}
+						}, new List<string>()
+					}
+				});
+
+				setupAction.DocInclusionPredicate((documentName, apiDescription) => {
 					var actionApiVersionModel = apiDescription.ActionDescriptor
 					.GetApiVersionModel(ApiVersionMapping.Explicit | ApiVersionMapping.Implicit);
 
-					if (actionApiVersionModel == null)
-					{
+					if (actionApiVersionModel == null) {
 						return true;
 					}
 
-					if (actionApiVersionModel.DeclaredApiVersions.Any())
-					{
+					if (actionApiVersionModel.DeclaredApiVersions.Any()) {
 						return actionApiVersionModel.DeclaredApiVersions.Any(v =>
 						$"openapiv{v.ToString()}" == documentName);
 					}
@@ -93,11 +108,12 @@ namespace Asp.NetCore_API
 				setupAction.IncludeXmlComments(xmlCommentsFullPath);
 			});
 
-			services.AddMvc(setupAction =>
-			{
+			services.AddMvc(setupAction => {
 				setupAction.EnableEndpointRouting = false;
 				setupAction.Filters.Add(
 										new ProducesResponseTypeAttribute(StatusCodes.Status400BadRequest));
+				setupAction.Filters.Add(
+						new ProducesResponseTypeAttribute(StatusCodes.Status401Unauthorized));
 				setupAction.Filters.Add(
 						new ProducesResponseTypeAttribute(StatusCodes.Status406NotAcceptable));
 				setupAction.Filters.Add(
@@ -107,12 +123,15 @@ namespace Asp.NetCore_API
 
 				setupAction.ReturnHttpNotAcceptable = true;
 
+				// Add Authorization to all controllers
+				setupAction.Filters.Add(new AuthorizeFilter());
+
 				// XML support
 				setupAction.OutputFormatters.Add(new XmlSerializerOutputFormatter());
 
 				// var jsonOutputFormatter = setupAction.OutputFormatters
 				// 					.OfType<JsonOutputFormatter>().FirstOrDefault();
-				// 
+				//
 				// if (jsonOutputFormatter != null)
 				// {
 				// 	// remove text/json as it isn't the approved media type
@@ -125,6 +144,9 @@ namespace Asp.NetCore_API
 			})
 				.AddXmlSerializerFormatters()
 				.SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+			services.AddAuthentication("Basic")
+				.AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("Basic", null);
 
 			services.AddAutoMapper(typeof(Startup));
 
@@ -146,22 +168,18 @@ namespace Asp.NetCore_API
 			IApiVersionDescriptionProvider provider
 		)
 		{
-			if (env.IsDevelopment())
-			{
+			if (env.IsDevelopment()) {
 				app.UseDeveloperExceptionPage();
 			}
-			else
-			{
+			else {
 				app.UseHsts();
 			}
 
 			app.UseHttpsRedirection();
 
 			app.UseSwagger();
-			app.UseSwaggerUI(options =>
-			{
-				foreach (var description in provider.ApiVersionDescriptions)
-				{
+			app.UseSwaggerUI(options => {
+				foreach (var description in provider.ApiVersionDescriptions) {
 					options.SwaggerEndpoint(
 							$"/swagger/openapi{description.GroupName}/swagger.json",
 							description.GroupName.ToUpperInvariant());
@@ -171,10 +189,10 @@ namespace Asp.NetCore_API
 
 			app.UseRouting();
 
-			app.UseAuthorization();
+			app.UseAuthentication();
+			//app.UseAuthorization();
 
-			app.UseEndpoints(endpoints =>
-			{
+			app.UseEndpoints(endpoints => {
 				endpoints.MapControllers();
 			});
 		}
