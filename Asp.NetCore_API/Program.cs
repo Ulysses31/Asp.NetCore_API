@@ -5,7 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NLog.Web;
 using System;
+using System.IO;
 
 namespace Asp.NetCore_API
 {
@@ -20,6 +22,10 @@ namespace Asp.NetCore_API
 		/// <param name="args">The arguments.</param>
 		public static void Main(string[] args)
 		{
+			// NLOG Conf https://github.com/NLog/NLog/wiki/Getting-started-with-ASP.NET-Core-5
+			var logPath = Path.Combine(Directory.GetCurrentDirectory(), "Logs");
+			NLog.GlobalDiagnosticsContext.Set("LogDirectory", logPath);
+
 			var host = CreateWebHostBuilder(args).Build();
 
 			// migrate the database.  Best practice = in Main, using service scope
@@ -48,6 +54,12 @@ namespace Asp.NetCore_API
 		/// <returns>IWebHostBuilder</returns>
 		public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 				WebHost.CreateDefaultBuilder(args)
+						.ConfigureLogging(opt => {
+							opt.ClearProviders();
+							// Trace Debug Info Warning Error Fatal
+							opt.SetMinimumLevel(LogLevel.Trace);
+						})
+						.UseNLog()
 						.UseStartup<Startup>();
 	}
 }

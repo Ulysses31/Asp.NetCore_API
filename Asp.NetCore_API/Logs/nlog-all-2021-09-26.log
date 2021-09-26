@@ -1,0 +1,2 @@
+[ 2021-09-26 09:35:04.5493 ] | (ERROR) | Asp.NetCore_API.Controllers.V1.AuthorsController | System.Exception: ERROR OCCURED
+   at Asp.NetCore_API.Controllers.V1.AuthorsController.GetAuthors() in C:\Users\ulysses31\Documents\Visual Studio 2019\Projects\.NET\Pluralsight\Asp.NetCore_API\Asp.NetCore_API\Controllers\V1\AuthorsController.cs:line 57 

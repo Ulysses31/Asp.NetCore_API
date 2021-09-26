@@ -1,39 +1,53 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace Library.API.Migrations
+namespace Asp.NetCore_API.Migrations
 {
-#pragma warning disable CS1591
-
 	public partial class InitialMigration : Migration
 	{
 		protected override void Up(MigrationBuilder migrationBuilder)
 		{
 			migrationBuilder.CreateTable(
 					name: "Authors",
-					columns: table => new
-					{
-						Id = table.Column<Guid>(nullable: false),
-						FirstName = table.Column<string>(maxLength: 150, nullable: false),
-						LastName = table.Column<string>(maxLength: 150, nullable: false)
+					columns: table => new {
+						Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+						FirstName = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+						LastName = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false)
 					},
-					constraints: table =>
-					{
+					constraints: table => {
 						table.PrimaryKey("PK_Authors", x => x.Id);
 					});
 
 			migrationBuilder.CreateTable(
-					name: "Books",
-					columns: table => new
-					{
-						Id = table.Column<Guid>(nullable: false),
-						Title = table.Column<string>(maxLength: 150, nullable: false),
-						Description = table.Column<string>(maxLength: 2500, nullable: true),
-						AmountOfPages = table.Column<int>(nullable: true),
-						AuthorId = table.Column<Guid>(nullable: false)
+					name: "Logger",
+					columns: table => new {
+						Id = table.Column<int>(type: "int", nullable: false)
+									.Annotation("SqlServer:Identity", "1, 1"),
+						SourceProject = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
+						MachineName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+						Logged = table.Column<DateTime>(type: "datetime2", nullable: false),
+						Level = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+						Message = table.Column<string>(type: "nvarchar(max)", nullable: true),
+						Logger = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+						CallSite = table.Column<string>(type: "nvarchar(max)", nullable: true),
+						Exception = table.Column<string>(type: "nvarchar(max)", nullable: true),
+						Guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+						CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
 					},
-					constraints: table =>
-					{
+					constraints: table => {
+						table.PrimaryKey("PK_Logger", x => x.Id);
+					});
+
+			migrationBuilder.CreateTable(
+					name: "Books",
+					columns: table => new {
+						Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+						Title = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+						Description = table.Column<string>(type: "nvarchar(2500)", maxLength: 2500, nullable: true),
+						AmountOfPages = table.Column<int>(type: "int", nullable: true),
+						AuthorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+					},
+					constraints: table => {
 						table.PrimaryKey("PK_Books", x => x.Id);
 						table.ForeignKey(
 											name: "FK_Books_Authors_AuthorId",
@@ -78,9 +92,10 @@ namespace Library.API.Migrations
 					name: "Books");
 
 			migrationBuilder.DropTable(
+					name: "Logger");
+
+			migrationBuilder.DropTable(
 					name: "Authors");
 		}
 	}
-
-#pragma warning restore CS1591
 }

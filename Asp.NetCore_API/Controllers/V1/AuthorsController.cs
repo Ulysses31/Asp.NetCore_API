@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using NLog;
+using Microsoft.Extensions.Logging;
 
 namespace Asp.NetCore_API.Controllers.V1
 {
@@ -22,6 +23,7 @@ namespace Asp.NetCore_API.Controllers.V1
 	[Produces("application/json", "application/xml")]
 	public class AuthorsController : Controller
 	{
+		private readonly ILogger<AuthorsController> _logger;
 		private readonly IAuthorRepository _authorsRepository;
 		private readonly IMapper _mapper;
 
@@ -31,13 +33,14 @@ namespace Asp.NetCore_API.Controllers.V1
 		/// <param name="authorsRepository">The authors repository.</param>
 		/// <param name="mapper">The mapper.</param>
 		public AuthorsController(
+				ILogger<AuthorsController> logger,
 				IAuthorRepository authorsRepository,
 				IMapper mapper)
 		{
+			_logger = logger;
 			_authorsRepository = authorsRepository;
 			_mapper = mapper;
 		}
-
 
 		/// <summary>
 		/// Gets the authors.
@@ -50,8 +53,15 @@ namespace Asp.NetCore_API.Controllers.V1
 		[HttpGet]
 		public async Task<ActionResult<IEnumerable<Models.Author>>> GetAuthors()
 		{
-			var authorsFromRepo = await _authorsRepository.GetAuthorsAsync();
-			return Ok(_mapper.Map<IEnumerable<Models.Author>>(authorsFromRepo));
+			try {
+				throw new Exception("ERROR OCCURED");
+				// var authorsFromRepo = await _authorsRepository.GetAuthorsAsync();
+				// return Ok(_mapper.Map<IEnumerable<Models.Author>>(authorsFromRepo));
+			}
+			catch (Exception ex) {
+				_logger.LogError(ex.ToString(), ex);
+				return BadRequest(ex.ToString());
+			}
 		}
 
 		/// <summary>
@@ -69,8 +79,7 @@ namespace Asp.NetCore_API.Controllers.V1
 		)
 		{
 			var authorFromRepo = await _authorsRepository.GetAuthorAsync(authorId);
-			if (authorFromRepo == null)
-			{
+			if (authorFromRepo == null) {
 				return NotFound();
 			}
 
@@ -110,8 +119,7 @@ namespace Asp.NetCore_API.Controllers.V1
 				AuthorForUpdate authorForUpdate)
 		{
 			var authorFromRepo = await _authorsRepository.GetAuthorAsync(authorId);
-			if (authorFromRepo == null)
-			{
+			if (authorFromRepo == null) {
 				return NotFound();
 			}
 
@@ -142,15 +150,14 @@ namespace Asp.NetCore_API.Controllers.V1
 		)
 		{
 			var authorFromRepo = await _authorsRepository.GetAuthorAsync(authorId);
-			if (authorFromRepo == null)
-			{
+			if (authorFromRepo == null) {
 				return NotFound();
 			}
 
 			// map to DTO to apply the patch to
 			var author = _mapper.Map<Models.AuthorForUpdate>(authorFromRepo);
 			patchDocument.ApplyTo(
-				author, 
+				author,
 				(Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter)ModelState
 			);
 
@@ -158,8 +165,7 @@ namespace Asp.NetCore_API.Controllers.V1
 			// was badly formed  These aren't caught via the ApiController
 			// validation, so we must manually check the modelstate and
 			// potentially return these errors.
-			if (!ModelState.IsValid)
-			{
+			if (!ModelState.IsValid) {
 				return new UnprocessableEntityObjectResult(ModelState);
 			}
 

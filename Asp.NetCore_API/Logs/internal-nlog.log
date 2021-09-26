@@ -1,0 +1,36 @@
+2021-09-26 09:33:29.7249 Info Message Template Auto Format enabled
+2021-09-26 09:33:29.7359 Info Loading assembly: NLog.Web.AspNetCore
+2021-09-26 09:33:29.7782 Info Adding target FileTarget(Name=allfile)
+2021-09-26 09:33:29.7782 Info Adding target FileTarget(Name=ownFile-web)
+2021-09-26 09:33:29.7875 Info Adding target DatabaseTarget(Name=database)
+2021-09-26 09:33:29.8110 Info Validating config: TargetNames=allfile, ownFile-web, database, ConfigItems=88, FilePath=C:\Users\ulysses31\Documents\Visual Studio 2019\Projects\.NET\Pluralsight\Asp.NetCore_API\Asp.NetCore_API\bin\Debug\net5.0\NLog.config
+2021-09-26 09:33:29.8472 Info Configuration initialized.
+2021-09-26 09:33:29.8472 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.11.13229. Product version: 4.7.11+33ed3a9f86277651e93ddf39cda64a046a06778b. GlobalAssemblyCache: False
+2021-09-26 09:34:11.4788 Info AppDomain Shutting down. Logger closing...
+2021-09-26 09:34:11.4882 Info Logger has been shut down.
+2021-09-26 09:34:17.3040 Info Message Template Auto Format enabled
+2021-09-26 09:34:17.3130 Info Loading assembly: NLog.Web.AspNetCore
+2021-09-26 09:34:17.3511 Info Adding target FileTarget(Name=allfile)
+2021-09-26 09:34:17.3511 Info Adding target FileTarget(Name=ownFile-web)
+2021-09-26 09:34:17.3613 Info Adding target DatabaseTarget(Name=database)
+2021-09-26 09:34:17.3822 Info Validating config: TargetNames=allfile, ownFile-web, database, ConfigItems=88, FilePath=C:\Users\ulysses31\Documents\Visual Studio 2019\Projects\.NET\Pluralsight\Asp.NetCore_API\Asp.NetCore_API\bin\Debug\net5.0\NLog.config
+2021-09-26 09:34:17.4293 Info Configuration initialized.
+2021-09-26 09:34:17.4293 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.11.13229. Product version: 4.7.11+33ed3a9f86277651e93ddf39cda64a046a06778b. GlobalAssemblyCache: False
+2021-09-26 09:34:33.1701 Info AppDomain Shutting down. Logger closing...
+2021-09-26 09:34:33.1761 Info Logger has been shut down.
+2021-09-26 09:34:43.8156 Info Message Template Auto Format enabled
+2021-09-26 09:34:43.8156 Info Loading assembly: NLog.Web.AspNetCore
+2021-09-26 09:34:43.8552 Info Adding target FileTarget(Name=allfile)
+2021-09-26 09:34:43.8552 Info Adding target FileTarget(Name=ownFile-web)
+2021-09-26 09:34:43.8657 Info Adding target DatabaseTarget(Name=database)
+2021-09-26 09:34:43.8853 Info Validating config: TargetNames=allfile, ownFile-web, database, ConfigItems=88, FilePath=C:\Users\ulysses31\Documents\Visual Studio 2019\Projects\.NET\Pluralsight\Asp.NetCore_API\Asp.NetCore_API\bin\Debug\net5.0\NLog.config
+2021-09-26 09:34:43.9308 Info Configuration initialized.
+2021-09-26 09:34:43.9308 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.11.13229. Product version: 4.7.11+33ed3a9f86277651e93ddf39cda64a046a06778b. GlobalAssemblyCache: False
+2021-09-26 09:36:09.8675 Info Message Template Auto Format enabled
+2021-09-26 09:36:09.8675 Info Loading assembly: NLog.Web.AspNetCore
+2021-09-26 09:36:09.9058 Info Adding target FileTarget(Name=allfile)
+2021-09-26 09:36:09.9074 Info Adding target FileTarget(Name=ownFile-web)
+2021-09-26 09:36:09.9074 Info Adding target DatabaseTarget(Name=database)
+2021-09-26 09:36:09.9290 Info Validating config: TargetNames=allfile, ownFile-web, database, ConfigItems=88, FilePath=C:\Users\ulysses31\Documents\Visual Studio 2019\Projects\.NET\Pluralsight\Asp.NetCore_API\Asp.NetCore_API\bin\Debug\net5.0\NLog.config
+2021-09-26 09:36:09.9634 Info Configuration initialized.
+2021-09-26 09:36:09.9634 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.11.13229. Product version: 4.7.11+33ed3a9f86277651e93ddf39cda64a046a06778b. GlobalAssemblyCache: False

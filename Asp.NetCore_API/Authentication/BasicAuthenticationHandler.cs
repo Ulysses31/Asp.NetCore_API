@@ -44,9 +44,10 @@ namespace Library.API.Authentication
 				var username = credentials[0];
 				var password = credentials[1];
 
-				if (username == "Pluralsight" && password == "Pluralsight") {
+				if (username == "admin" && password == "123") {
 					var claims = new[] {
-												new Claim(ClaimTypes.NameIdentifier, username)};
+						new Claim(ClaimTypes.NameIdentifier, username)
+					};
 					var identity = new ClaimsIdentity(claims, Scheme.Name);
 					var principal = new ClaimsPrincipal(identity);
 					var ticket = new AuthenticationTicket(principal, Scheme.Name);

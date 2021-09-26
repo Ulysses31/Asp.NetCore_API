@@ -27,6 +27,14 @@ namespace Asp.NetCore_API.Contexts
 		public DbSet<Author> Authors { get; set; }
 
 		/// <summary>
+		/// Gets or sets the logs.
+		/// </summary>
+		/// <value>
+		/// The logs.
+		/// </value>
+		public DbSet<CLogger> Logs { get; set; }
+
+		/// <summary>
 		/// Initializes a new instance of the <see cref="LibraryContext"/> class.
 		/// </summary>
 		/// <param name="options">The options.</param>

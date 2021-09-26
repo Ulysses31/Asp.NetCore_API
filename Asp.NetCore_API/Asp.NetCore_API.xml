@@ -63,6 +63,14 @@
             The authors.
             </value>
         </member>
+        <member name="P:Asp.NetCore_API.Contexts.LibraryContext.Logs">
+            <summary>
+            Gets or sets the logs.
+            </summary>
+            <value>
+            The logs.
+            </value>
+        </member>
         <member name="M:Asp.NetCore_API.Contexts.LibraryContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Asp.NetCore_API.Contexts.LibraryContext})">
             <summary>
             Initializes a new instance of the <see cref="T:Asp.NetCore_API.Contexts.LibraryContext"/> class.
@@ -89,7 +97,7 @@
             </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
         </member>
-        <member name="M:Asp.NetCore_API.Controllers.V1.AuthorsController.#ctor(Asp.NetCore_API.Services.IAuthorRepository,AutoMapper.IMapper)">
+        <member name="M:Asp.NetCore_API.Controllers.V1.AuthorsController.#ctor(Microsoft.Extensions.Logging.ILogger{Asp.NetCore_API.Controllers.V1.AuthorsController},Asp.NetCore_API.Services.IAuthorRepository,AutoMapper.IMapper)">
             <summary>
             Initializes a new instance of the <see cref="T:Asp.NetCore_API.Controllers.V1.AuthorsController"/> class.
             </summary>
