@@ -145,4 +145,3 @@ C:\Users\ulysses31\Documents\Visual Studio 2019\Projects\.NET\Pluralsight\Asp.Ne
 C:\Users\ulysses31\Documents\Visual Studio 2019\Projects\.NET\Pluralsight\Asp.NetCore_API\Asp.NetCore_API\bin\Debug\net5.0\runtimes\win-x86\native\sni.dll
 C:\Users\ulysses31\Documents\Visual Studio 2019\Projects\.NET\Pluralsight\Asp.NetCore_API\Asp.NetCore_API\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\ulysses31\Documents\Visual Studio 2019\Projects\.NET\Pluralsight\Asp.NetCore_API\Asp.NetCore_API\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
-C:\Users\ulysses31\Documents\Visual Studio 2019\Projects\.NET\Pluralsight\Asp.NetCore_API\Asp.NetCore_API\obj\Debug\net5.0\Asp.NetCore_API.csproj.AssemblyReference.cache

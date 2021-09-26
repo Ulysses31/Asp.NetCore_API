@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/Logs
 /.pnp
 .pnp.js
 
@@ -22,5 +23,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-/Asp.NetCoreMVC/bin
-/Asp.NetCoreMVC/obj
+/Asp.NetCore_API/bin
+/Asp.NetCore_API/obj
