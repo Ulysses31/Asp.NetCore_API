@@ -4,19 +4,6 @@
         <name>Asp.NetCore_API</name>
     </assembly>
     <members>
-        <member name="T:Library.API.Authentication.BasicAuthenticationHandler">
-            <summary>
-            BasicAuthenticationHandler class
-            </summary>
-        </member>
-        <member name="M:Library.API.Authentication.BasicAuthenticationHandler.HandleAuthenticateAsync">
-            <summary>
-            Allows derived types to handle authentication.
-            </summary>
-            <returns>
-            The <see cref="T:Microsoft.AspNetCore.Authentication.AuthenticateResult" />.
-            </returns>
-        </member>
         <member name="T:Asp.NetCore_API.ConfigureSwaggerOptions">
             <summary>
             ConfigureSwaggerOptions class
@@ -473,6 +460,91 @@
             The description.
             </value>
         </member>
+        <member name="T:Asp.NetCore_API.Models.CApiLogging">
+            <summary>
+            ApiLogging class
+            </summary>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.CApiLogging.RequestTime">
+            <summary>
+            Gets or sets the request time.
+            </summary>
+            <value>
+            The request time.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.CApiLogging.ResponseMillis">
+            <summary>
+            Gets or sets the response millis.
+            </summary>
+            <value>
+            The response millis.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.CApiLogging.ResponseHeaders">
+            <summary>
+            Gets or sets the response headers.
+            </summary>
+            <value>
+            The response headers.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.CApiLogging.StatusCode">
+            <summary>
+            Gets or sets the status code.
+            </summary>
+            <value>
+            The status code.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.CApiLogging.RequestHeaders">
+            <summary>
+            Gets or sets the request headers.
+            </summary>
+            <value>
+            The request headers.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.CApiLogging.Method">
+            <summary>
+            Gets or sets the method.
+            </summary>
+            <value>
+            The method.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.CApiLogging.Path">
+            <summary>
+            Gets or sets the path.
+            </summary>
+            <value>
+            The path.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.CApiLogging.QueryString">
+            <summary>
+            Gets or sets the query string.
+            </summary>
+            <value>
+            The query string.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.CApiLogging.RequestBody">
+            <summary>
+            Gets or sets the request body.
+            </summary>
+            <value>
+            The request body.
+            </value>
+        </member>
+        <member name="P:Asp.NetCore_API.Models.CApiLogging.ResponseBody">
+            <summary>
+            Gets or sets the response body.
+            </summary>
+            <value>
+            The response body.
+            </value>
+        </member>
         <member name="T:Asp.NetCore_API.Profiles.AuthorProfile">
             <summary>
             AuthorProfile : Profile class
@@ -724,6 +796,19 @@
             <param name="app"></param>
             <param name="env"></param>
             <param name="provider"></param>
+        </member>
+        <member name="T:Library.API.Authentication.BasicAuthenticationHandler">
+            <summary>
+            BasicAuthenticationHandler class
+            </summary>
+        </member>
+        <member name="M:Library.API.Authentication.BasicAuthenticationHandler.HandleAuthenticateAsync">
+            <summary>
+            Allows derived types to handle authentication.
+            </summary>
+            <returns>
+            The <see cref="T:Microsoft.AspNetCore.Authentication.AuthenticateResult" />.
+            </returns>
         </member>
     </members>
 </doc>

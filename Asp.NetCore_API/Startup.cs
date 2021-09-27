@@ -1,3 +1,4 @@
+using Asp.NetCore_API.ApiLogging;
 using Asp.NetCore_API.Contexts;
 using Asp.NetCore_API.Services;
 using Library.API.Authentication;
@@ -196,6 +197,8 @@ namespace Asp.NetCore_API
 
 			app.UseAuthentication();
 			//app.UseAuthorization();
+
+			app.UseMiddleware<ApiLoggingMiddleware>();
 
 			app.UseEndpoints(endpoints => {
 				endpoints.MapControllers();
